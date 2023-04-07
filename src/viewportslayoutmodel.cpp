@@ -51,6 +51,7 @@ QHash<int, QByteArray> ViewportsLayoutModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[ViewportsLayoutModel::UrlRole] = "url";
+    roles[ViewportsLayoutModel::UrlFullScreenRole] = "urlFullScreen";
     roles[ViewportsLayoutModel::ColumnSpanRole] = "columnSpan";
     roles[ViewportsLayoutModel::RowSpanRole] = "rowSpan";
     roles[ViewportsLayoutModel::VisibleRole] = "visible";

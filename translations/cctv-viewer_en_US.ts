@@ -155,10 +155,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Url</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Mute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -196,6 +192,14 @@
     </message>
     <message>
         <source>Press and hold to exit delete mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grid URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximized URL</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

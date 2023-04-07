@@ -236,7 +236,10 @@ FocusScope {
                     ]
 
                     onVisibleChanged: fullScreen = false
-                    onFullScreenChanged: d2.setCurrentIndex("fullScreenIndex", fullScreen)
+                    onFullScreenChanged: {
+                        d2.setCurrentIndex("fullScreenIndex", fullScreen);
+                        player.source = fullScreen && model.urlFullScreen ? model.urlFullScreen : model.url
+                    }
                     onFocusChanged: {
                         d2.setCurrentIndex("focusIndex", focus);
                         d2.setCurrentIndex("pressAndHoldIndex", false);

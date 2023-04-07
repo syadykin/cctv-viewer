@@ -14,6 +14,7 @@ class ViewportsLayoutItem : public QObject
     Q_ENUMS(Visible)
 
     Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
+    Q_PROPERTY(QString urlFullScreen READ urlFullScreen WRITE setUrlFullScreen NOTIFY urlFullScreenChanged)
     Q_PROPERTY(int rowSpan READ rowSpan WRITE setRowSpan NOTIFY rowSpanChanged)
     Q_PROPERTY(int columnSpan READ columnSpan WRITE setColumnSpan NOTIFY columnSpanChanged)
     Q_PROPERTY(ViewportsLayoutItem::Visible visible READ visible WRITE setVisible NOTIFY visibleChanged)
@@ -29,6 +30,7 @@ public:
     };
 
     QString url() const { return m_url; }
+    QString urlFullScreen() const { return m_urlFullScreen; }
     int rowSpan() const { return m_rowSpan; }
     int columnSpan() const { return m_columnSpan; }
     ViewportsLayoutItem::Visible visible() const { return m_visible; }
@@ -37,6 +39,7 @@ public:
 
 public slots:
     Q_PROPERTY_WRITE_IMPL(QString, url, setUrl, urlChanged)
+    Q_PROPERTY_WRITE_IMPL(QString, urlFullScreen, setUrlFullScreen, urlFullScreenChanged)
     Q_PROPERTY_WRITE_IMPL(int, rowSpan, setRowSpan, rowSpanChanged)
     Q_PROPERTY_WRITE_IMPL(int, columnSpan, setColumnSpan, columnSpanChanged)
     Q_PROPERTY_WRITE_IMPL(ViewportsLayoutItem::Visible, visible, setVisible, visibleChanged)
@@ -46,6 +49,7 @@ public slots:
 signals:
     void changed();
     void urlChanged(const QString &url);
+    void urlFullScreenChanged(const QString &urlFullScreen);
     void rowSpanChanged(int rowSpan);
     void columnSpanChanged(int columnSpan);
     void visibleChanged(ViewportsLayoutItem::Visible visible);
@@ -54,6 +58,7 @@ signals:
 
 private:
     QString m_url;
+    QString m_urlFullScreen;
     int m_rowSpan;
     int m_columnSpan;
     ViewportsLayoutItem::Visible m_visible;
@@ -74,6 +79,7 @@ public:
 
     enum ModelRoles {
         UrlRole = Qt::UserRole + 1,
+        UrlFullScreenRole,
         ColumnSpanRole,
         RowSpanRole,
         VisibleRole,

@@ -115,7 +115,7 @@ FocusScope {
                 onTriggered: {
                     if (rootWindowSettings.sidebarAutoCollapse &&
                         rootSideBar.state === SideBar.Popup) {
-                        rootSideBar.state = SideBar.Compact;                        
+                        rootSideBar.state = SideBar.Compact;
                     }
                 }
             }
@@ -439,14 +439,32 @@ FocusScope {
                                 enabled: rootSideBar.currentViewportIndex >= 0
                                 anchors.fill: parent
 
+                                Text {
+                                    text: qsTr("Grid URL")
+                                    color: "white"
+                                    font.pointSize: rootWindow.font.pointSize * 1.05
+                                }
                                 TextField {
                                     text: enabled ? Utils.currentModel().get(currentViewportIndex).url : ""
-                                    placeholderText: qsTr("Url")
                                     selectByMouse: true
 
                                     Layout.fillWidth: true
 
                                     onEditingFinished: Utils.currentModel().get(currentViewportIndex).url = text
+                                }
+
+                                Text {
+                                    text: qsTr("Maximized URL")
+                                    color: "white"
+                                    font.pointSize: rootWindow.font.pointSize * 1.05
+                                }
+                                TextField {
+                                    text: enabled ? Utils.currentModel().get(currentViewportIndex).urlFullScreen : ""
+                                    selectByMouse: true
+
+                                    Layout.fillWidth: true
+
+                                    onEditingFinished: Utils.currentModel().get(currentViewportIndex).urlFullScreen = text
                                 }
 
                                 Button {

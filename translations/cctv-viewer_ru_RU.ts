@@ -33,35 +33,42 @@
     <name>Player</name>
     <message>
         <location filename="../src/Player.qml" line="91"/>
+        <location filename="../src/Player.qml" line="91"/>
         <source>No media!</source>
         <translation>Нет медиаисточника!</translation>
     </message>
     <message>
+        <location filename="../src/Player.qml" line="94"/>
         <location filename="../src/Player.qml" line="94"/>
         <source>Loading...</source>
         <translation>Загрузка...</translation>
     </message>
     <message>
         <location filename="../src/Player.qml" line="97"/>
+        <location filename="../src/Player.qml" line="97"/>
         <source>Loaded</source>
         <translation>Загружено</translation>
     </message>
     <message>
+        <location filename="../src/Player.qml" line="102"/>
         <location filename="../src/Player.qml" line="102"/>
         <source>Stalled</source>
         <translation>Застопорено</translation>
     </message>
     <message>
         <location filename="../src/Player.qml" line="107"/>
+        <location filename="../src/Player.qml" line="107"/>
         <source>End of media</source>
         <translation>Конец медиаисточника</translation>
     </message>
     <message>
         <location filename="../src/Player.qml" line="110"/>
+        <location filename="../src/Player.qml" line="110"/>
         <source>Invalid media!</source>
         <translation>Недопустимый медиаисточник!</translation>
     </message>
     <message>
+        <location filename="../src/Player.qml" line="118"/>
         <location filename="../src/Player.qml" line="118"/>
         <source>Buffering %1%</source>
         <translation>Буферизация %1%</translation>
@@ -78,10 +85,13 @@
     <name>RootWindow</name>
     <message>
         <location filename="../src/RootWindow.qml" line="14"/>
+        <location filename="../src/RootWindow.qml" line="14"/>
         <source>CCTV Viewer</source>
         <translation>CCTV Viewer</translation>
     </message>
     <message>
+        <location filename="../src/RootWindow.qml" line="88"/>
+        <location filename="../src/RootWindow.qml" line="170"/>
         <location filename="../src/RootWindow.qml" line="88"/>
         <location filename="../src/RootWindow.qml" line="170"/>
         <source>Error reading configuration!</source>
@@ -92,45 +102,54 @@
     <name>SettingsDialog</name>
     <message>
         <location filename="../src/SettingsDialog.qml" line="8"/>
+        <location filename="../src/SettingsDialog.qml" line="8"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
+        <location filename="../src/SettingsDialog.qml" line="23"/>
         <location filename="../src/SettingsDialog.qml" line="23"/>
         <source>General</source>
         <translation>Общее</translation>
     </message>
     <message>
         <location filename="../src/SettingsDialog.qml" line="34"/>
+        <location filename="../src/SettingsDialog.qml" line="34"/>
         <source>Allow running multiple application instances</source>
         <translation>Разрешить запуск нескольких экземпляров приложения</translation>
     </message>
     <message>
+        <location filename="../src/SettingsDialog.qml" line="40"/>
         <location filename="../src/SettingsDialog.qml" line="40"/>
         <source>Automatically collapse sidebar</source>
         <translation>Автоматически сворачивать боковую панель</translation>
     </message>
     <message>
         <location filename="../src/SettingsDialog.qml" line="46"/>
+        <location filename="../src/SettingsDialog.qml" line="46"/>
         <source>View</source>
         <translation>Вид</translation>
     </message>
     <message>
+        <location filename="../src/SettingsDialog.qml" line="56"/>
         <location filename="../src/SettingsDialog.qml" line="56"/>
         <source>Show preset indicator</source>
         <translation>Показать индикатор текущего пресета</translation>
     </message>
     <message>
         <location filename="../src/SettingsDialog.qml" line="62"/>
+        <location filename="../src/SettingsDialog.qml" line="62"/>
         <source>Viewport</source>
         <translation>Вьюпорт</translation>
     </message>
     <message>
         <location filename="../src/SettingsDialog.qml" line="72"/>
+        <location filename="../src/SettingsDialog.qml" line="72"/>
         <source>Unmute when the viewport is in full screen mode</source>
         <translation>Включить звук, когда вьюпорт находится в полноэкранном режиме</translation>
     </message>
     <message>
+        <location filename="../src/SettingsDialog.qml" line="76"/>
         <location filename="../src/SettingsDialog.qml" line="76"/>
         <source>Default AVFormat options</source>
         <translation>Опции AVFormat по умолчанию</translation>
@@ -140,20 +159,24 @@
     <name>SideBar</name>
     <message>
         <location filename="../src/SideBar.qml" line="200"/>
+        <location filename="../src/SideBar.qml" line="200"/>
         <source>Tools</source>
         <translation>Инструменты</translation>
     </message>
     <message>
+        <location filename="../src/SideBar.qml" line="208"/>
         <location filename="../src/SideBar.qml" line="208"/>
         <source>Window division</source>
         <translation>Деление окна</translation>
     </message>
     <message>
         <location filename="../src/SideBar.qml" line="252"/>
+        <location filename="../src/SideBar.qml" line="252"/>
         <source>Error reading configuration!</source>
         <translation>Ошибка чтения конфигурации!</translation>
     </message>
     <message>
+        <location filename="../src/SideBar.qml" line="304"/>
         <location filename="../src/SideBar.qml" line="304"/>
         <source>Press and hold to enter edit mode</source>
         <translation>Нажмите и удерживайте,
@@ -161,88 +184,111 @@
     </message>
     <message>
         <location filename="../src/SideBar.qml" line="335"/>
+        <location filename="../src/SideBar.qml" line="335"/>
         <source>x</source>
         <translation>х</translation>
     </message>
     <message>
+        <location filename="../src/SideBar.qml" line="350"/>
         <location filename="../src/SideBar.qml" line="350"/>
         <source>Geometry</source>
         <translation>Геметрия</translation>
     </message>
     <message>
         <location filename="../src/SideBar.qml" line="384"/>
+        <location filename="../src/SideBar.qml" line="384"/>
         <source>Full Screen</source>
         <translation>Полноэкранный режим</translation>
     </message>
     <message>
+        <location filename="../src/SideBar.qml" line="396"/>
         <location filename="../src/SideBar.qml" line="396"/>
         <source>Other</source>
         <translation>Прочее</translation>
     </message>
     <message>
         <location filename="../src/SideBar.qml" line="405"/>
+        <location filename="../src/SideBar.qml" line="405"/>
         <source>Merging cells</source>
         <translation>Объединение ячеек</translation>
     </message>
     <message>
+        <location filename="../src/SideBar.qml" line="419"/>
         <location filename="../src/SideBar.qml" line="419"/>
         <source>Viewport%1</source>
         <translation>Вьюпорт%1</translation>
     </message>
     <message>
         <location filename="../src/SideBar.qml" line="419"/>
+        <location filename="../src/SideBar.qml" line="419"/>
         <source> #%1</source>
         <translation> №%1</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="444"/>
-        <source>Url</source>
-        <translation></translation>
+        <location filename="../src/SideBar.qml" line="443"/>
+        <location filename="../src/SideBar.qml" line="443"/>
+        <source>Grid URL</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="558"/>
+        <location filename="../src/SideBar.qml" line="457"/>
+        <location filename="../src/SideBar.qml" line="457"/>
+        <source>Maximized URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/SideBar.qml" line="576"/>
+        <location filename="../src/SideBar.qml" line="576"/>
         <source>Press and hold to enter delete mode</source>
         <translation>Нажмите и удерживайте,
 чтобы войти в режим удаления</translation>
     </message>
     <message>
         <location filename="../src/SideBar.qml" line="431"/>
+        <location filename="../src/SideBar.qml" line="431"/>
         <source>Select viewport!</source>
         <translation>Выберите вьюпорт!</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="453"/>
+        <location filename="../src/SideBar.qml" line="471"/>
+        <location filename="../src/SideBar.qml" line="471"/>
         <source>Mute</source>
         <translation>Отключение звука</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="473"/>
+        <location filename="../src/SideBar.qml" line="491"/>
+        <location filename="../src/SideBar.qml" line="491"/>
         <source>AVFormat options</source>
         <translation>Опции AVFormat</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="515"/>
+        <location filename="../src/SideBar.qml" line="533"/>
+        <location filename="../src/SideBar.qml" line="533"/>
         <source>Presets</source>
         <translation>Пресеты</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="558"/>
+        <location filename="../src/SideBar.qml" line="576"/>
+        <location filename="../src/SideBar.qml" line="576"/>
         <source>Press and hold to exit delete mode</source>
         <translation>Нажмите и удерживайте,
 чтобы выйти из режима удаления</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="576"/>
+        <location filename="../src/SideBar.qml" line="594"/>
+        <location filename="../src/SideBar.qml" line="594"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="589"/>
+        <location filename="../src/SideBar.qml" line="607"/>
+        <location filename="../src/SideBar.qml" line="607"/>
         <source>Expand</source>
         <translation>Развернуть</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="589"/>
+        <location filename="../src/SideBar.qml" line="607"/>
+        <location filename="../src/SideBar.qml" line="607"/>
         <source>Collapse</source>
         <translation>Свернуть</translation>
     </message>
@@ -250,6 +296,7 @@
 <context>
     <name>SideBarItem</name>
     <message>
+        <location filename="../src/SideBarItem.qml" line="90"/>
         <location filename="../src/SideBarItem.qml" line="90"/>
         <source>Error reading configuration!</source>
         <translation>Ошибка чтения конфигурации!</translation>
@@ -259,15 +306,18 @@
     <name>SingleApplicationDialog</name>
     <message>
         <location filename="../src/SingleApplicationDialog.qml" line="7"/>
+        <location filename="../src/SingleApplicationDialog.qml" line="7"/>
         <source>Warning!</source>
         <translation>Внимание!</translation>
     </message>
     <message>
         <location filename="../src/SingleApplicationDialog.qml" line="26"/>
+        <location filename="../src/SingleApplicationDialog.qml" line="26"/>
         <source>The application is already running!</source>
         <translation>Приложение уже запущено!</translation>
     </message>
     <message>
+        <location filename="../src/SingleApplicationDialog.qml" line="41"/>
         <location filename="../src/SingleApplicationDialog.qml" line="41"/>
         <source>Allow running multiple application instances</source>
         <translation>Разрешить запуск нескольких экземпляров приложения</translation>
@@ -276,7 +326,8 @@
 <context>
     <name>ViewportsLayout</name>
     <message>
-        <location filename="../src/ViewportsLayout.qml" line="254"/>
+        <location filename="../src/ViewportsLayout.qml" line="257"/>
+        <location filename="../src/ViewportsLayout.qml" line="257"/>
         <source>F</source>
         <comment>Shortcut</comment>
         <translation>А</translation>

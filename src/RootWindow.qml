@@ -118,6 +118,14 @@ ApplicationWindow {
             }
         }
     }
+
+    Shortcut {
+        sequence: "A"
+        onActivated: {
+            Utils.currentLayout().get(0).forceActiveFocus();
+        }
+    }
+
     // Shortcuts for the first 9 presets (Alt + 1, Alt + 2, ..., Alt + 9)
     Repeater {
         model: Context.config.kioskMode ? 0 : Math.min(stackLayout.count, 9)

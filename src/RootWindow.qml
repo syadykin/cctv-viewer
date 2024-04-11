@@ -3,6 +3,7 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
+import QtQuick.Dialogs 1.3
 import Qt.labs.settings 1.0
 import CCTV_Viewer.Core 1.0
 import CCTV_Viewer.Models 1.0
@@ -75,8 +76,8 @@ ApplicationWindow {
         property bool presetIndicator: true
         // TODO: Move to "Viewport"
         property string defaultAVFormatOptions: JSON.stringify({
-            "analyzeduration": 0, // 0 µs
-            "probesize": 500000 // 500 KB
+            "analyzeduration": 0,  // 0 µs
+            "probesize": 500000  // 500 KB
         })
 
         function toJSValue(key) {
@@ -93,12 +94,31 @@ ApplicationWindow {
     }
 
     Settings {
+        id: viewSettings
+
+        fileName: Context.config.fileName
+        category: "View"
+
+        property bool hideCursorWhenFullScreen: true
+    }
+
+    Settings {
         id: viewportSettings
 
         fileName: Context.config.fileName
         category: "Viewport"
 
         property bool unmuteWhenFullScreen: false
+    }
+
+    Settings {
+        id: presetsSettings
+
+        fileName: Context.config.fileName
+        category: "Presets"
+
+        property bool carouselRunning: false
+        property int carouselInterval: 15000  // ms
     }
 
     Shortcut {
@@ -126,6 +146,14 @@ ApplicationWindow {
         }
     }
 
+    Shortcut {
+        sequence: "Alt+Right"
+        onActivated: stackLayout.currentIndex = Math.min(stackLayout.currentIndex + 1, stackLayout.count - 1)
+    }
+    Shortcut {
+        sequence: "Alt+Left"
+        onActivated: stackLayout.currentIndex = Math.max(stackLayout.currentIndex - 1, 0)
+    }
     // Shortcuts for the first 9 presets (Alt + 1, Alt + 2, ..., Alt + 9)
     Repeater {
         model: Context.config.kioskMode ? 0 : Math.min(stackLayout.count, 9)
@@ -138,8 +166,18 @@ ApplicationWindow {
         }
     }
     Shortcut {
-        sequence: StandardKey.FullScreen
-        onActivated: Context.config.fullScreen = !Context.config.fullScreen
+        sequence: "Space"
+        enabled: presetsSettings.carouselRunning
+        onActivated: carouselTimer.paused = !carouselTimer.paused
+    }
+    Shortcut {
+        sequences: ["F11", StandardKey.FullScreen]
+        onActivated: toggleFullScreen()
+        onActivatedAmbiguously: toggleFullScreen()
+
+        function toggleFullScreen() {
+            Context.config.fullScreen = !Context.config.fullScreen;
+        }
     }
     Shortcut {
         sequence: StandardKey.Quit
@@ -187,7 +225,7 @@ ApplicationWindow {
     Item {
         height: parent.height
         anchors.left: parent.left
-        anchors.right: sideBar.left
+        anchors.right: sideBarLoader.left
 
         Rectangle {
             color: "black"
@@ -201,7 +239,12 @@ ApplicationWindow {
             currentIndex: -1
             anchors.fill: parent
 
-            onCurrentIndexChanged: layoutsCollectionSettings.currentIndex = currentIndex
+            onCurrentIndexChanged: {
+                layoutsCollectionSettings.currentIndex = currentIndex;
+                if (carouselTimer.running) {
+                    carouselTimer.restart();
+                }
+            }
 
             Repeater {
                 id: swipeViewRepeater
@@ -212,23 +255,43 @@ ApplicationWindow {
                     focus: true
                 }
             }
+
+            Timer {
+                id: carouselTimer
+
+                repeat: true
+                interval: presetsSettings.carouselInterval
+                running: presetsSettings.carouselRunning && !paused
+
+                property bool paused: false
+
+                onTriggered: {
+                    // Scrolling carousel to right
+                    if (stackLayout.currentIndex < layoutsCollectionModel.count - 1) {
+                        ++stackLayout.currentIndex
+                    } else {
+                        stackLayout.currentIndex = 0;
+                    }
+                }
+            }
         }
 
-        PageIndicator {
-            interactive: true
+        PresetIndicator {
             visible: layoutsCollectionSettings.presetIndicator && stackLayout.count > 1
-            currentIndex: stackLayout.currentIndex
             count: stackLayout.count
+            currentIndex: stackLayout.currentIndex
+            carouselState: presetsSettings.carouselRunning ? (carouselTimer.paused ? PresetIndicator.Paused : PresetIndicator.Running) : PresetIndicator.Disabled
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
 
             onCurrentIndexChanged: stackLayout.currentIndex = currentIndex
+            onCarouselControlClicked: carouselTimer.paused = (carouselState === PresetIndicator.Running ? true : false)
         }
     }
 
 
     Loader {
-        id: sideBar
+        id: sideBarLoader
 
         height: parent.height
         anchors.right: parent.right
@@ -240,18 +303,14 @@ ApplicationWindow {
         }
     }
 
-    SingleApplicationDialog {
-        onVisibleChanged: {
-            if (!visible) {
-                if (singleApplication) {
-                    Qt.quit();
-                } else {
-                    generalSettings.singleApplication = false;
-                    stackLayout.visible = true;
-                }
-            }
-        }
+    MessageDialog {
+        title: qsTr("Already running!")
+        icon: StandardIcon.Warning
+        text: qsTr("The application is already running!")
+        informativeText: qsTr("Go to the first instance and allow multiple instances of the app to run in Settings.")
+        standardButtons: MessageDialog.Ok
 
+        onVisibilityChanged: !visible && Qt.quit();
         Component.onCompleted: {
             if (generalSettings.singleApplication && SingleApplication.isRunning()) {
                 open();
@@ -263,5 +322,16 @@ ApplicationWindow {
 
     SettingsDialog {
         id: settingsDialog
+    }
+
+    CursorShape {
+        id: cursorShape
+
+        autoHide: rootWindow.activeFocusItem != null &&  // Disabled when ApplicationWindow is't active
+                  !settingsDialog.visible &&
+                  (sideBarLoader.status === Loader.Null || sideBarLoader.item.state === SideBar.Compact) &&
+                  Context.config.fullScreen && viewSettings.hideCursorWhenFullScreen
+        autoHideTimeout: 3000
+        anchors.fill: parent
     }
 }

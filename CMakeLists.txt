@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 
 set(VER_MAJ 0)
 set(VER_MIN 1)
-set(VER_PAT 8)
+set(VER_PAT 9)
 set(REL_STATUS "alpha")
 
 set(APP_NAME "CCTV Viewer")
@@ -21,6 +21,37 @@ if(DEFINED REL_STATUS)
     set(VERSION "${VERSION}-${REL_STATUS}")
 endif()
 
+### Packager and Git commit
+execute_process(COMMAND git -C ${CMAKE_SOURCE_DIR} log --pretty=format:%h -n 1
+    OUTPUT_VARIABLE GIT_COMMIT
+    ERROR_QUIET
+)
+
+if (EXISTS "${CMAKE_SOURCE_DIR}/debian/git-build-recipe.manifest")
+    set(PACKAGER "PPA")
+
+    if ("${GIT_COMMIT}" STREQUAL "")
+        file(READ "${CMAKE_SOURCE_DIR}/debian/git-build-recipe.manifest" PPA_MANIFEST)
+        string(REGEX MATCH "lp:cctv-viewer git-commit:(.......)" _ ${PPA_MANIFEST})
+        set(GIT_COMMIT ${CMAKE_MATCH_1})
+    endif()
+endif()
+
+if(NOT DEFINED PACKAGER)
+    if ("${GIT_COMMIT}" STREQUAL "")
+        set(PACKAGER "SRC")
+    else()
+        set(PACKAGER "GIT")
+    endif()
+endif()
+
+if ("${GIT_COMMIT}" STREQUAL "")
+    set(GIT_COMMIT "N/A")
+endif()
+
+set(VERSION "${VERSION} ${PACKAGER}.${GIT_COMMIT}")
+###
+
 add_definitions(-DAPP_NAME="${APP_NAME}" -DAPP_VERSION="${VERSION}" -DORG_NAME="${ORG_NAME}" -DORG_DOMAIN="${ORG_DOMAIN}")
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -31,6 +62,33 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug" AND NOT ANDROID)
+    add_compile_options(
+        -Werror
+        -pedantic-errors
+
+        -Wall
+        -Wextra
+        -Wpedantic
+
+        -Wcast-align
+        -Wcast-qual
+        # -Wconversion
+        -Wctor-dtor-privacy
+        -Wduplicated-branches
+        -Wduplicated-cond
+        -Wextra-semi
+        -Wfloat-equal
+        -Wlogical-op
+        -Wnon-virtual-dtor
+        -Wold-style-cast
+        # -Woverloaded-virtual
+        -Wredundant-decls
+        # -Wsign-conversion
+        # -Wsign-promo
+    )
+endif()
 
 # Disable use of C++ API deprecated in Qt 5.15
 add_compile_definitions(QT_DISABLE_DEPRECATED_BEFORE=0x050F00)
@@ -49,7 +107,6 @@ add_compile_definitions(QT_DISABLE_DEPRECATED_BEFORE=0x050F00)
 #endif()
 
 set(QT_LINK_DEPENDENCIES Core Quick Multimedia)
-set(FFMPEG_LINK_DEPENDENCIES avformat avcodec avutil swscale swresample avdevice)
 
 if (ANDROID)
     list(APPEND QT_LINK_DEPENDENCIES Svg)
@@ -65,8 +122,8 @@ if (ANDROID)
         )
 endif()
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS ${QT_LINK_DEPENDENCIES} LinguistTools REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} 5.12 COMPONENTS ${QT_LINK_DEPENDENCIES} LinguistTools REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS ${QT_LINK_DEPENDENCIES} QuickCompiler LinguistTools REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} 5.12 COMPONENTS ${QT_LINK_DEPENDENCIES} QuickCompiler LinguistTools REQUIRED)
 
 file(GLOB TS_FILES "${CMAKE_SOURCE_DIR}/translations/*.ts")
 
@@ -77,7 +134,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         qt5_add_resources(RESOURCES cctv-viewer.qrc)
     endif()
 else()
-    find_package(Qt5QuickCompiler REQUIRED)
     qtquick_compiler_add_resources(RESOURCES cctv-viewer.qrc)
 endif()
 
@@ -85,9 +141,9 @@ set(PROJ_FILES
     src/main.cpp
     src/global.h
     src/singleapplication.h
-    src/config.h src/config.cpp
-    src/context.h src/context.cpp
+    src/config.cpp src/config.h
     src/context.cpp src/context.h
+    src/eventfilter.h src/eventfilter.cpp
     src/viewportslayoutmodel.cpp src/viewportslayoutmodel.h
     src/viewportslayoutscollectionmodel.cpp src/viewportslayoutscollectionmodel.h
     ${RESOURCES}
@@ -115,7 +171,7 @@ target_compile_definitions(cctv-viewer
 foreach (ITEM ${QT_LINK_DEPENDENCIES})
     target_link_libraries(cctv-viewer PRIVATE Qt${QT_VERSION_MAJOR}::${ITEM})
 endforeach()
-target_link_libraries(cctv-viewer PRIVATE ${FFMPEG_LINK_DEPENDENCIES})
+target_link_libraries(cctv-viewer PRIVATE ${QMLAV_LINK_DEPENDENCIES})
 
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM true)
 set_source_files_properties(${TS_FILES} PROPERTIES OUTPUT_LOCATION "${CMAKE_SOURCE_DIR}/translations")

@@ -5,31 +5,30 @@
 
 #include "qmlavplayer.h"
 #include "context.h"
+#include "eventfilter.h"
 #include "singleapplication.h"
 #include "context.h"
 #include "viewportslayoutscollectionmodel.h"
 
 void registerQmlTypes()
 {
-    qmlRegisterSingletonType<SingleApplication>("CCTV_Viewer.Utils", 1, 0, "SingleApplication",
-                                                [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
-        Q_UNUSED(engine)
-        Q_UNUSED(scriptEngine)
-
-        return new SingleApplication();
-    });
-    qmlRegisterSingletonType<SingleApplication>("CCTV_Viewer.Core", 1, 0, "Context",
-                                                [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
-        Q_UNUSED(engine)
-        Q_UNUSED(scriptEngine)
-
+    qmlRegisterSingletonType<Context>("CCTV_Viewer.Core", 1, 0, "Context",
+                                      []([[maybe_unused]] QQmlEngine *engine,
+                                         [[maybe_unused]] QJSEngine *scriptEngine) -> QObject * {
         return new Context();
+    });
+    qmlRegisterSingletonType<SingleApplication>("CCTV_Viewer.Utils", 1, 0, "SingleApplication",
+                                                []([[maybe_unused]] QQmlEngine *engine,
+                                                   [[maybe_unused]] QJSEngine *scriptEngine) -> QObject * {
+        return new SingleApplication();
     });
 
     qmlRegisterType<QmlAVPlayer>("CCTV_Viewer.Multimedia", 1, 0, "QmlAVPlayer");
     qmlRegisterType<ViewportsLayoutItem>("CCTV_Viewer.Models", 1, 0, "ViewportsLayoutItem");
     qmlRegisterType<ViewportsLayoutModel>("CCTV_Viewer.Models", 1, 0, "ViewportsLayoutModel");
     qmlRegisterType<ViewportsLayoutsCollectionModel>("CCTV_Viewer.Models", 1, 0, "ViewportsLayoutsCollectionModel");
+
+    qmlRegisterType<EventFilter>("CCTV_Viewer.Utils", 1, 0, "EventFilter");
 }
 
 int main(int argc, char *argv[])
@@ -44,29 +43,12 @@ int main(int argc, char *argv[])
 #endif
 #if defined(ORG_NAME)
     QCoreApplication::setOrganizationName(QLatin1String(ORG_NAME));
-
-    // Migration to new org. name
-    if (QSettings().allKeys().size() == 0) {
-        QStringList keys;
-        QVariantMap values;
-        QCoreApplication::setOrganizationName(QLatin1String("T171RU"));
-
-        keys = QSettings().allKeys();
-        for (int i = 0; i < keys.size(); ++i) {
-            values.insert(keys[i], QSettings().value(keys[i]));
-        }
-
-        QCoreApplication::setOrganizationName(QLatin1String(ORG_NAME));
-
-        for (int i = 0; i < keys.size(); ++i) {
-            QSettings().setValue(keys[i], values[keys[i]]);
-        }
-    }
-
 #endif
 #if defined(ORG_DOMAIN)
     QCoreApplication::setOrganizationDomain(QLatin1String(ORG_DOMAIN));
 #endif
+
+    qInfo() << "CCTV Viewer version " << APP_VERSION;
 
     registerQmlTypes();
 

@@ -2,6 +2,7 @@ import QtQml 2.12
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
+import QtQuick.Dialogs 1.3
 import Qt.labs.settings 1.0
 import CCTV_Viewer.Core 1.0
 import CCTV_Viewer.Themes 1.0
@@ -157,39 +158,57 @@ FocusScope {
                         Frame {
                             anchors.fill: parent
 
-                            Text {
-                                text: String("<p><a href=\"https://cctv-viewer.org\" style=\"color: white; text-decoration: none;\">CCTV Viewer: v%1</a></p>
-                                              <p><a href=\"https://liberapay.com/iEvgeny/donate\"><img src=\"qrc:/images/liberapay.svg\" width=\"90\"></a>
-                                              <a href=\"https://github.com/iEvgeny/cctv-viewer\"><img src=\"qrc:/images/github.svg\" width=\"90\"></a></p>").arg(Qt.application.version)
-                                color: "white"
-                                font.pointSize: rootWindow.font.pointSize * 1.05
-                                textFormat: Text.RichText
-                                horizontalAlignment: Text.AlignHCenter
-                                topPadding: 5
-                                width: parent.width
+                            ColumnLayout {
+                                anchors.fill: parent
 
-                                onLinkHovered: {
-                                    if (link.length > 0) {
-                                        cursorShapeArea.setCursor(Qt.PointingHandCursor);
-                                    } else {
-                                        cursorShapeArea.unsetCursor();
+                                TextEdit {
+                                    readOnly: true
+                                    selectByMouse: true
+
+                                    text: String("<a href=\"https://cctv-viewer.org\" style=\"color: white; text-decoration: none;\">v%1</a>").arg(Qt.application.version)
+                                    color: "white"
+                                    font.pointSize: rootWindow.font.pointSize * 1.05
+                                    textFormat: Text.RichText
+                                    horizontalAlignment: Text.AlignHCenter
+
+                                    Layout.fillWidth: true
+
+                                    onLinkHovered: header.linkHovered(link)
+                                    onLinkActivated: {
+                                        toolTip.visible = true;
+                                        selectAll();
+                                        copy();
+                                    }
+
+                                    ToolTip {
+                                        id: toolTip
+
+                                        delay: 0
+                                        timeout: Compact.toolTipTimeout
+                                        text: qsTr("Copied to clipboard")
                                     }
                                 }
-                                onLinkActivated: Qt.openUrlExternally(link)
 
-                                MouseArea {
-                                    id: cursorShapeArea
+                                Text {
+                                    text: "<a href=\"https://github.com/iEvgeny/cctv-viewer\"><img src=\"qrc:/images/github.svg\" width=\"180\"></a>"
+                                    color: "white"
+                                    font.pointSize: rootWindow.font.pointSize * 1.05
+                                    textFormat: Text.RichText
+                                    horizontalAlignment: Text.AlignHCenter
 
-                                    acceptedButtons: Qt.NoButton
-                                    anchors.fill: parent
+                                    Layout.fillWidth: true
 
-                                    function setCursor(cursorShape) {
-                                        cursorShapeArea.cursorShape = cursorShape;
-                                    }
-                                    function unsetCursor() {
-                                        cursorShapeArea.cursorShape = Qt.ArrowCursor;
-                                    }
+                                    onLinkHovered: header.linkHovered(link)
+                                    onLinkActivated: Qt.openUrlExternally(link)
                                 }
+                            }
+                        }
+
+                        function linkHovered(link) {
+                            if (link !== "") {
+                                cursorShape.set(Qt.PointingHandCursor);
+                            } else {
+                                cursorShape.reset();
                             }
                         }
                     }
@@ -488,7 +507,7 @@ FocusScope {
                                     Layout.fillWidth: true
 
                                     Text {
-                                        text: qsTr("AVFormat options")
+                                        text: qsTr("FFmpeg options")
                                         color: "white"
                                         font.pointSize: rootWindow.font.pointSize * 1.05
                                     }
@@ -559,7 +578,8 @@ FocusScope {
 
                                         onClicked: {
                                             if (deleteMode) {
-                                                layoutsCollectionModel.remove(index);
+                                                presetDeleteDialog.index = index;
+                                                presetDeleteDialog.open();
                                             } else {
                                                 stackLayout.currentIndex = index;
                                             }
@@ -587,6 +607,20 @@ FocusScope {
                                     onClicked: layoutsCollectionModel.append().size = Qt.size(3, 3)
                                 }
                             }
+                        }
+
+                        MessageDialog {
+                            id: presetDeleteDialog
+
+                            title: qsTr("Are you sure?")
+                            icon: StandardIcon.Question
+                            text: qsTr("Are you sure you want to delete preset #%1?").arg(index + 1)
+                            informativeText: qsTr("It's an irreversible procedure. Be careful!")
+                            standardButtons: MessageDialog.Yes | MessageDialog.No
+
+                            property int index: -1
+
+                            onYes: layoutsCollectionModel.remove(index)
                         }
                     }
                     SideBarItem {

@@ -3,6 +3,8 @@ Section: video
 Priority: optional
 Maintainer: Evgeny S Maksimov <admin@vragam.net>
 Build-Depends: debhelper (>= 9),
+               libva-dev,
+               libglx-dev,
                libavformat-dev,
                libavcodec-dev,
                libavutil-dev,
@@ -12,7 +14,9 @@ Build-Depends: debhelper (>= 9),
                qtdeclarative5-dev,
                qtmultimedia5-dev,
                qttools5-dev,
-               cmake
+               libgtest-dev,
+               cmake,
+               git
 Standards-Version: 3.9.8
 Homepage: https://github.com/iEvgeny/cctv-viewer
 Vcs-Git: https://github.com/iEvgeny/cctv-viewer.git
@@ -32,3 +36,5 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
          qml-module-qt-labs-settings,
          qml-module-qtmultimedia
 Description: CCTV Viewer - viewer and mounter video streams.
+ A simple application for simultaneously viewing multiple video streams.
+ Designed for high performance and low latency. Based on ffmpeg.

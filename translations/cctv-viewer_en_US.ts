@@ -23,6 +23,10 @@
         <source>Kiosk mode functionality.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Log level [%1...%2].</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Player</name>
@@ -72,6 +76,18 @@
         <source>Error reading configuration!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The application is already running!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Already running!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to the first instance and allow multiple instances of the app to run in Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>
@@ -85,10 +101,6 @@
     </message>
     <message>
         <source>Allow running multiple application instances</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default AVFormat options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -109,6 +121,22 @@
     </message>
     <message>
         <source>Unmute when the viewport is in full screen mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default FFmpeg options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Presets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run presets carousel with interval (sec.):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide cursor in full screen mode</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -159,10 +187,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>AVFormat options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Presets</source>
         <translation type="unfinished"></translation>
     </message>
@@ -202,26 +226,31 @@
         <source>Maximized URL</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>FFmpeg options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to delete preset #%1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It&apos;s an irreversible procedure. Be careful!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SideBarItem</name>
     <message>
         <source>Error reading configuration!</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SingleApplicationDialog</name>
-    <message>
-        <source>Warning!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The application is already running!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Allow running multiple application instances</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -55,6 +55,12 @@ Dialog {
 
                     text: qsTr("Show preset indicator")
                 }
+
+                CheckBox {
+                    id: hideCursorWhenFullScreenCheckBox
+
+                    text: qsTr("Hide cursor in full screen mode")
+                }
             }
         }
 
@@ -73,7 +79,7 @@ Dialog {
                 }
 
                 Label {
-                    text: qsTr("Default AVFormat options")
+                    text: qsTr("Default FFmpeg options")
                 }
 
                 TextField {
@@ -82,6 +88,53 @@ Dialog {
                     selectByMouse: true
 
                     Layout.fillWidth: true
+                }
+            }
+        }
+
+        GroupBox {
+            title: qsTr("Presets")
+
+            Layout.fillWidth: true
+
+            ColumnLayout {
+                width: parent.width
+
+                RowLayout  {
+                    width: parent.width
+
+                    CheckBox {
+                        id: carouselRunningCheckBox
+
+                        text: qsTr("Run presets carousel with interval (sec.):")
+
+                        Layout.fillWidth: true
+                    }
+
+                    SpinBox {
+                        id: carouselIntervalSpinBox
+
+                        property int valueFactor: 1000
+
+                        enabled: carouselRunningCheckBox.checked
+
+                        stepSize: 100
+                        from: stepSize
+                        to: 300 * stepSize
+                        editable: true
+
+                        validator: DoubleValidator {
+                            decimals: 2
+                            bottom: Math.min(carouselIntervalSpinBox.from, carouselIntervalSpinBox.to)
+                            top:  Math.max(carouselIntervalSpinBox.from, carouselIntervalSpinBox.to)
+                        }
+                        textFromValue: function(value, locale) {
+                            return Number(value / valueFactor).toLocaleString(locale, 'f', validator.decimals)
+                        }
+                        valueFromText: function(text, locale) {
+                            return Number.fromLocaleString(locale, text) * valueFactor
+                        }
+                    }
                 }
             }
         }
@@ -94,7 +147,12 @@ Dialog {
         
         presetIndicatorCheckBox.checked = layoutsCollectionSettings.presetIndicator;
 
+        hideCursorWhenFullScreenCheckBox.checked = viewSettings.hideCursorWhenFullScreen;
+
         unmuteWhenFullScreenCheckBox.checked = viewportSettings.unmuteWhenFullScreen;
+
+        carouselRunningCheckBox.checked = presetsSettings.carouselRunning;
+        carouselIntervalSpinBox.value = presetsSettings.carouselInterval;
 
         defaultAVFormatOptions.text = "";
         var options = layoutsCollectionSettings.toJSValue("defaultAVFormatOptions");
@@ -113,7 +171,12 @@ Dialog {
         
         layoutsCollectionSettings.presetIndicator = presetIndicatorCheckBox.checked;
 
+        viewSettings.hideCursorWhenFullScreen = hideCursorWhenFullScreenCheckBox.checked;
+
         viewportSettings.unmuteWhenFullScreen = unmuteWhenFullScreenCheckBox.checked;
+
+        presetsSettings.carouselRunning = carouselRunningCheckBox.checked;
+        presetsSettings.carouselInterval = carouselIntervalSpinBox.value;
 
         layoutsCollectionSettings.defaultAVFormatOptions = JSON.stringify(Utils.parseOptions(defaultAVFormatOptions.text));
     }

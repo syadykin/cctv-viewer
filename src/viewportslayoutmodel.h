@@ -22,7 +22,7 @@ class ViewportsLayoutItem : public QObject
     Q_PROPERTY(QVariantMap avFormatOptions READ avFormatOptions WRITE setAVFormatOptions NOTIFY avFormatOptionsChanged)
 
 public:
-    explicit ViewportsLayoutItem(QObject *parent = nullptr);
+    ViewportsLayoutItem(QObject *parent = nullptr);
 
     enum class Visible {
         Visible,
@@ -38,13 +38,13 @@ public:
     QVariantMap avFormatOptions() const { return m_avFormatOptions; }
 
 public slots:
-    Q_PROPERTY_WRITE_IMPL(QString, url, setUrl, urlChanged)
-    Q_PROPERTY_WRITE_IMPL(QString, urlFullScreen, setUrlFullScreen, urlFullScreenChanged)
-    Q_PROPERTY_WRITE_IMPL(int, rowSpan, setRowSpan, rowSpanChanged)
-    Q_PROPERTY_WRITE_IMPL(int, columnSpan, setColumnSpan, columnSpanChanged)
-    Q_PROPERTY_WRITE_IMPL(ViewportsLayoutItem::Visible, visible, setVisible, visibleChanged)
-    Q_PROPERTY_WRITE_IMPL(QVariant, volume, setVolume, volumeChanged)
-    Q_PROPERTY_WRITE_IMPL(QVariantMap, avFormatOptions, setAVFormatOptions, avFormatOptionsChanged)
+    PROPERTY_WRITE_IMPL(QString, url, setUrl, urlChanged)
+    PROPERTY_WRITE_IMPL(QString, urlFullScreen, setUrlFullScreen, urlFullScreenChanged)
+    PROPERTY_WRITE_IMPL(int, rowSpan, setRowSpan, rowSpanChanged)
+    PROPERTY_WRITE_IMPL(int, columnSpan, setColumnSpan, columnSpanChanged)
+    PROPERTY_WRITE_IMPL(ViewportsLayoutItem::Visible, visible, setVisible, visibleChanged)
+    PROPERTY_WRITE_IMPL(QVariant, volume, setVolume, volumeChanged)
+    PROPERTY_WRITE_IMPL(QVariantMap, avFormatOptions, setAVFormatOptions, avFormatOptionsChanged)
 
 signals:
     void changed();

@@ -91,9 +91,9 @@
     </message>
     <message>
         <location filename="../src/RootWindow.qml" line="88"/>
-        <location filename="../src/RootWindow.qml" line="170"/>
+        <location filename="../src/RootWindow.qml" line="178"/>
         <location filename="../src/RootWindow.qml" line="88"/>
-        <location filename="../src/RootWindow.qml" line="170"/>
+        <location filename="../src/RootWindow.qml" line="178"/>
         <source>Error reading configuration!</source>
         <translation>Ошибка чтения конфигурации!</translation>
     </message>

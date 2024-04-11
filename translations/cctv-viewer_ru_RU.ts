@@ -88,22 +88,22 @@
     </message>
     <message>
         <location filename="../src/RootWindow.qml" line="89"/>
-        <location filename="../src/RootWindow.qml" line="208"/>
+        <location filename="../src/RootWindow.qml" line="216"/>
         <source>Error reading configuration!</source>
         <translation>Ошибка чтения конфигурации!</translation>
     </message>
     <message>
-        <location filename="../src/RootWindow.qml" line="299"/>
+        <location filename="../src/RootWindow.qml" line="307"/>
         <source>Already running!</source>
         <translation>Уже запущено!</translation>
     </message>
     <message>
-        <location filename="../src/RootWindow.qml" line="301"/>
+        <location filename="../src/RootWindow.qml" line="309"/>
         <source>The application is already running!</source>
         <translation>Приложение уже запущено!</translation>
     </message>
     <message>
-        <location filename="../src/RootWindow.qml" line="302"/>
+        <location filename="../src/RootWindow.qml" line="310"/>
         <source>Go to the first instance and allow multiple instances of the app to run in Settings.</source>
         <translation>Перейдите к первому экземпляру и разрешите запуск нескольких экземпляров приложения в настройках.</translation>
     </message>
@@ -236,25 +236,22 @@
         <translation> №%1</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="443"/>
-        <location filename="../src/SideBar.qml" line="443"/>
+        <location filename="../src/SideBar.qml" line="462"/>
         <source>Grid URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="457"/>
-        <location filename="../src/SideBar.qml" line="457"/>
+        <location filename="../src/SideBar.qml" line="476"/>
         <source>Maximized URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-    <message>
-        <location filename="../src/SideBar.qml" line="492"/>
+        <location filename="../src/SideBar.qml" line="510"/>
         <source>FFmpeg options</source>
         <translation>Опции FFmpeg</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="578"/>
+        <location filename="../src/SideBar.qml" line="596"/>
         <source>Press and hold to enter delete mode</source>
         <translation>Нажмите и удерживайте,
 чтобы войти в режим удаления</translation>
@@ -270,48 +267,48 @@
         <translation>Скопировано в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="472"/>
+        <location filename="../src/SideBar.qml" line="490"/>
         <source>Mute</source>
         <translation>Отключение звука</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="534"/>
+        <location filename="../src/SideBar.qml" line="552"/>
         <source>Presets</source>
         <translation>Пресеты</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="578"/>
+        <location filename="../src/SideBar.qml" line="596"/>
         <source>Press and hold to exit delete mode</source>
         <translation>Нажмите и удерживайте,
 чтобы выйти из режима удаления</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="597"/>
+        <location filename="../src/SideBar.qml" line="615"/>
         <source>Are you sure?</source>
         <translation>Вы уверены?</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="599"/>
+        <location filename="../src/SideBar.qml" line="617"/>
         <source>Are you sure you want to delete preset #%1?</source>
         <translation>Вы уверены, что хотите удалить пресет №%1?</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="600"/>
+        <location filename="../src/SideBar.qml" line="618"/>
         <source>It&apos;s an irreversible procedure. Be careful!</source>
         <translation>Это необратимая процедура. Будьте внимательны!</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="610"/>
+        <location filename="../src/SideBar.qml" line="628"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="623"/>
+        <location filename="../src/SideBar.qml" line="641"/>
         <source>Expand</source>
         <translation>Развернуть</translation>
     </message>
     <message>
-        <location filename="../src/SideBar.qml" line="623"/>
+        <location filename="../src/SideBar.qml" line="641"/>
         <source>Collapse</source>
         <translation>Свернуть</translation>
     </message>
@@ -320,7 +317,6 @@
     <name>SideBarItem</name>
     <message>
         <location filename="../src/SideBarItem.qml" line="90"/>
-        <location filename="../src/SideBarItem.qml" line="90"/>
         <source>Error reading configuration!</source>
         <translation>Ошибка чтения конфигурации!</translation>
     </message>
@@ -328,7 +324,6 @@
 <context>
     <name>ViewportsLayout</name>
     <message>
-        <location filename="../src/ViewportsLayout.qml" line="257"/>
         <location filename="../src/ViewportsLayout.qml" line="257"/>
         <source>F</source>
         <comment>Shortcut</comment>
